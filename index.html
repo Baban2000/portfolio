@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subhadeep Banerjee - Backend Web Developer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        header {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            animation: slideIn 2s ease-in-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 1px;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        section {
+            margin: 20px 0;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: block;
+        }
+        .skills, .projects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .skill, .project {
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+            background-color: #e7e7e7;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 300px;
+            animation: popIn 1.5s ease-in-out;
+        }
+        @keyframes popIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+        .skill h3, .project h3 {
+            margin-top: 0;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .skill-level {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .skill-bar {
+            height: 100%;
+            width: var(--percentage);
+            background-color: #007bff; /* Adjust the color as per your design */
+            transition: width 2s ease-in-out;
+        }
+
+        .skill h3 {
+            margin-top: 0;
+        }
+
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        /* Adjust the animation keyframes as per your need */
+        @keyframes increaseWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: var(--percentage);
+            }
+        }
+
+        #education {
+        margin-bottom: 40px;
+        }
+
+        #education h2 {
+            margin-bottom: 10px;
+        }
+
+        #education p {
+            margin: 0;
+        }
+
+        /* Certifications section */
+        #certifications {
+            margin-bottom: 40px;
+        }
+
+        #certifications h2 {
+            margin-bottom: 10px;
+        }
+
+        #certifications ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #certifications li {
+            margin-bottom: 10px;
+        }
+
+        /* Experience section */
+        #experience {
+            margin-bottom: 40px;
+        }
+
+        #experience h2 {
+            margin-bottom: 10px;
+        }
+
+        #experience p {
+            margin: 0;
+        }
+
+        /*#scrollLeftBtn,
+        #scrollRightBtn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            color: #000;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        #scrollLeftBtn {
+            left: 10px;
+        }
+
+        #scrollRightBtn {
+            right: 10px;
+        }*/
+        .projects .project:nth-child(n+5) {
+            display: none;
+        }
+
+        #showMoreBtn,
+        #showLessBtn {
+            background-color: #007bff; /* Blue color */
+            color: #fff; /* White text color */
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        #showLessBtn {
+            display: none; /* Initially hide "Show less" button */
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <img src="https://media.licdn.com/dms/image/D5603AQEkplI1yG3ANw/profile-displayphoto-shrink_200_200/0/1716637289989?e=2147483647&v=beta&t=ualXbad_2JoUekWRxhrQv0udpPKohm8bi0ag0-iPUTE" alt="Subhadeep Banerjee" class="profile-pic">
+        <h1>Subhadeep Banerjee</h1>
+        <p>Backend Web Developer - PHP, MySQL, CodeIgniter</p>
+    </header>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hi, I'm Subhadeep Banerjee, a passionate Backend web developer specializing in PHP, MySQL, and CodeIgniter. With extensive experience in building robust web applications, I strive to deliver high-quality code and exceptional user experiences.</p>
+        </section>
+        <section id="education">
+            <h2>Educational Qualifications</h2>
+            <p>Diploma In Electronics and Telecommunication engineering - [WBSCTVESD]</p>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <ul>
+                <li>Backend Web Development Certification - [EJOBINDIA]</li>
+        
+            </ul>
+        </section>
+
+        <section id="experience">
+            <h2>Working Experience</h2>
+            <p>Backend Web Developer at [Infosolz Consultancy Pvt Ltd], [2023-present]</p>
+        </section>
+
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills">
+                <div class="skill">
+                    <h3>PHP</h3>
+                    <div class="skill-level" style="--percentage: 70%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>CodeIgniter</h3>
+                    <div class="skill-level" style="--percentage: 70%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>MySQL</h3>
+                    <div class="skill-level" style="--percentage: 65%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>API Integration</h3>
+                    <div class="skill-level" style="--percentage: 40%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>Chatgpt</h3>
+                    <div class="skill-level" style="--percentage: 60%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>HTML5</h3>
+                    <div class="skill-level" style="--percentage: 85%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <h3>JavaScript</h3>
+                    <div class="skill-level" style="--percentage: 50%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div>
+                <!-- <div class="skill">
+                    <h3>CSS (Basic)</h3>
+                    <div class="skill-level" style="--percentage: 50%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div> -->
+                <div class="skill">
+                    <h3>jQuery</h3>
+                    <div class="skill-level" style="--percentage: 50%;">
+                        <div class="skill-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section id="projects" class="scrollable">
+            <h2>Projects</h2>
+            <!-- <button id="scrollLeftBtn">&lt;</button> -->
+            <div class="projects">
+                <div class="project">
+                    <h3>CampusJadugar</h3>
+                    <p>A comprehensive campus management system designed to streamline administrative processes in educational institutions, integrated with the Google Gemini API for enhanced functionality.</p>
+
+                </div>
+                <div class="project">
+                    <h3>Offbeat Plus</h3>
+                    <p>An innovative education platform offering unique educational programs and workshops.</p>
+                </div>
+                <div class="project">
+                    <h3>Offbeat Education</h3>
+                    <p>A dedicated platform for unconventional educational programs and workshops.</p>
+                </div>
+                <div class="project">
+                    <h3>Websites</h3>
+                    <p>A portfolio of various websites developed for clients, showcasing different styles and functionalities.</p>
+                </div>
+                <div class="project">
+                    <h3>NAAC Data Upload Software</h3>
+                    <p>An innovative software solution empowering educators and department heads to effortlessly upload and manage their certificates and patents, streamlining administrative tasks for higher education institutions.</p>
+                </div>
+            </div>
+            <!-- <button id="scrollRightBtn">&gt;</button> -->
+            <button id="showMoreBtn">Show more</button>
+            <button id="showLessBtn" style="display:none;">Show less</button>
+        </section>
+        
+        <section id="contact">
+            <h2>Contact</h2>
+            <p><i class="fas fa-envelope"></i> Email: <a href="mailto:subhadeepbanerjee12345@gmail.com">subhadeepbanerjee12345@gmail.com</a></p>
+            <p><i class="fas fa-phone"></i> Phone: <a href="tel:+919051739439">9051739439</a></p>
+            <p><i class="fab fa-linkedin"></i> Connect with me on <a href="https://www.linkedin.com/in/subhadeep-banerjee-954508271/" target="_blank">LinkedIn</a></p>
+            <p><i class="fab fa-facebook"></i> Connect with me on <a href="https://www.facebook.com/subhadeep.banerjee.39108" target="_blank">Facebook</a></p>
+        </section>
+
+    </div>
+    <footer>
+        <p>&copy; 2024 Subhadeep Banerjee. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const skills = [
+                { name: "PHP", percentage: 70 },
+                { name: "CodeIgniter", percentage: 70 },
+                { name: "MySQL", percentage: 65 },
+                { name: "API Integration", percentage: 40 },
+                { name: "HTML5", percentage: 85 },
+                { name: "JavaScript", percentage: 50 },
+                { name: "CSS (Basic)", percentage: 50 },
+                { name: "jQuery", percentage: 50 }
+                // Add more skills as needed
+            ];
+
+            const skillBars = document.querySelectorAll(".skill-level");
+            skillBars.forEach((bar, index) => {
+                const percentage = skills[index].percentage;
+                bar.style.setProperty("--percentage", `${percentage}%`);
+                if (percentage >= 80) {
+                    bar.style.backgroundColor = "green";
+                } else if (percentage >= 60) {
+                    bar.style.backgroundColor = "yellow";
+                } else {
+                    bar.style.backgroundColor = "red";
+                }
+            });
+        });
+    </script>
+<script>
+    var showMoreBtn = document.getElementById("showMoreBtn");
+    var showLessBtn = document.getElementById("showLessBtn");
+    var hiddenProjects = document.querySelectorAll(".projects .project:nth-child(n+5)");
+
+    // Add click event listener to "Show more" button
+    showMoreBtn.addEventListener("click", function() {
+        hiddenProjects.forEach(function(project) {
+            project.style.display = "block";
+        });
+        showMoreBtn.style.display = "none";
+        showLessBtn.style.display = "inline-block"; // Show the "Show less" button
+    });
+
+    // Add click event listener to "Show less" button
+    showLessBtn.addEventListener("click", function() {
+        hiddenProjects.forEach(function(project) {
+            project.style.display = "none";
+        });
+        showMoreBtn.style.display = "inline-block"; // Show the "Show more" button
+        showLessBtn.style.display = "none";
+    });
+</script>
+
+
+
+
+
+</body>
+</html>
